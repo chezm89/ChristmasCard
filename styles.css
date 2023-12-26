@@ -1,0 +1,26 @@
+html{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 35px;
+}
+
+.main {
+    width: 50%;
+    margin: auto;
+    
+}
+
+
+.card-container {
+    width: 50%;
+    background-color: rgb(138, 138, 240);
+
+}
+.card-container img {
+    width: 100%;
+}
+
+.card-container p {
+    color: white;
+    margin-left: 20%;
+    padding-bottom: 50px;
+}
