@@ -1,4 +1,4 @@
-name: CI
+name: CI/CD
 
 on:
   push:
@@ -8,11 +8,44 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
       - name: Build and Test
         run: |
-          # Add any build or test commands here
-          echo "Building and testing the static webpage."
+          # Add your build and test commands here
+
+      # Capture Deployment Frequency
+      - name: Capture Deployment Frequency
+        run: echo "Deployment Frequency: $(date +'%Y-%m-%d %H:%M:%S')" >> metrics.txt
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Deploy to Server (Replace with your deployment steps)
+        run: |
+          # Add your deployment commands here
+
+      # Capture Lead Time
+      - name: Capture Lead Time
+        run: echo "Lead Time: $(date +'%Y-%m-%d %H:%M:%S')" >> metrics.txt
+
+      # Capture Change Failure Rate (Assuming there is a failure condition)
+      - name: Capture Change Failure Rate
+        if: failure()
+        run: echo "Change Failure Rate: Deployment failed" >> metrics.txt
+
+  metrics:
+    needs: deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Display Metrics
+        run: cat metrics.txt
